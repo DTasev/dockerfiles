@@ -2,10 +2,13 @@ language: c
 
 dist: xenial
 services: docker
-env: DOCKER_IMAGE=dtasev/mantidnightly DEBIAN_FRONTEND=noninteractive
+env:
+  global:
+    DOCKER_IMAGE=dtasev/mantidnightly
 jobs:
-  - script:
+  - env: DOCKER_LABEL=u1804
+    script:
     - cd mantid
-    - docker build -f Ubuntu1804.Dockerfile --tag $DOCKER_IMAGE:u1804 .
+    - docker build -f Ubuntu1804.Dockerfile --tag $DOCKER_IMAGE:$DOCKER_LABEL .
     - echo $DOCKER_API_KEY | docker login -u $DOCKER_USERNAME --password-stdin
-    - docker push $DOCKER_IMAGE:centos7
+    - docker push $DOCKER_IMAGE:$DOCKER_LABEL
