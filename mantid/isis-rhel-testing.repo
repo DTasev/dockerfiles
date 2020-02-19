@@ -1,0 +1,20 @@
+[isis-rhel-testing]
+name=ISIS Software Repository for Redhat Enterprise Linux $releasever - $basearch
+baseurl=http://yum.isis.rl.ac.uk/rhel/testing/$releasever/$basearch
+failovermethod=priority
+enabled=0
+gpgcheck=0
+
+[isis-rhel-testing-debuginfo]
+name=ISIS Software Repository for Redhat Enterprise Linux $releasever - $basearch - Debug
+baseurl=http://yum.isis.rl.ac.uk/rhel/testing/$releasever/$basearch/debug
+failovermethod=priority
+enabled=0
+gpgcheck=0
+
+[isis-rhel-testing-source]
+name=ISIS Software Repository for Redhat Enterprise Linux $releasever - $basearch - Source
+baseurl=http://yum.isis.rl.ac.uk/rhel/testing/$releasever/SRPMS
+failovermethod=priority
+enabled=0
+gpgcheck=0

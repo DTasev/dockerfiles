@@ -1,16 +1,10 @@
 FROM centos:7
 
-ARG PACKAGE
-ARG PATH_ADDITIONS
+ADD isis-rhel-testing.repo /etc/yum.repos.d/isis-rhel-testing.repo
 
-ADD ${PACKAGE} /tmp/mantid.rpm
+# yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
 
-RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
-    yum install -y yum-plugin-copr && \
-    yum copr enable -y mantid/mantid && \
-    yum localinstall -y /tmp/mantid.rpm && \
+RUN su -c 'rpm -Uvh https://download.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm'
+RUN yum install --enablerepo=isis-rhel-testing mantidnightly && \
     rm -rf /tmp/*
 
-ENV PATH=${PATH_ADDITIONS}:${PATH}
-
-ADD ./version_test.py /mantid_version_check.py

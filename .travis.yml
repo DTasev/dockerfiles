@@ -1,0 +1,11 @@
+language: c
+
+dist: xenial
+services: docker
+env: DOCKER_IMAGE=dtasev/mantidnightly
+jobs:
+  - script:
+    - cd mantid
+    - docker build -f CentOS7.Dockerfile --tag $DOCKER_IMAGE:centos7 .
+    - docker login -u $DOCKER_USERNAME -p $DOCKER_API_KEY
+    - docker push $DOCKER_IMAGE:centos7

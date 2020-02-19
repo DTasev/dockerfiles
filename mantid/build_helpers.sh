@@ -4,10 +4,10 @@ IMAGE="mantidproject/mantid"
 
 function build_image {
   DOCKERFILE=$1
-  EXPECTED_VERSION=$2
-  TAG=$3
-  PACKAGE=$4
-  PATH_ADDITIONS=$5
+  TAG=$2
+  PACKAGE=$3
+  PATH_ADDITIONS=$4
+  EXPECTED_VERSION=$5
 
   docker build \
     --file=${DOCKERFILE} \
@@ -19,7 +19,7 @@ function build_image {
 
   if [ $build_result -ne 0 ]; then
     echo "Build of image for tag \"$TAG\" failed"
-    exit $build_result
+    return $build_result
   fi
 
   # Try to do a thing in Python for the image that has just been built
@@ -32,7 +32,7 @@ function build_image {
       echo "Image with tag \"$TAG\" is correct"
     else
       echo "Image with tag \"$TAG\" failed to build correctly"
-      exit 1
+      return 1
     fi
   else
     echo "Ignoring expected version test, just looking for something"
@@ -40,7 +40,7 @@ function build_image {
       echo "Have \"$version_test\" for version string, close enough"
     else
       echo "No version string, something is probably broken"
-      exit 1
+      return 1
     fi
   fi
 }
