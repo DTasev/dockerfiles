@@ -2,7 +2,7 @@ language: c
 
 dist: xenial
 services: docker
-env: DOCKER_IMAGE=dtasev/mantidnightly
+env: DOCKER_IMAGE=dtasev/mantidnightly DEBIAN_FRONTEND=noninteractive
 jobs:
   - script:
     - cd mantid
