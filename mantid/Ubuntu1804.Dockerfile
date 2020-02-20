@@ -2,6 +2,19 @@ FROM ubuntu:18.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+RUN apt-get update && apt-get install -y make wget git fontconfig \
+      libglib2.0-0 \
+      libxrandr2 \
+      libxss1 \
+      libxcursor1 \
+      libxcomposite1 \
+      libasound2 \
+      libxi6 \
+      libxtst6 \
+      libsm6 \
+      qt5-default &&\
+      apt-get clean
+
 RUN apt-get update && \
     apt-get install -y \
       curl \
